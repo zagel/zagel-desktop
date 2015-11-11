@@ -1,0 +1,25 @@
+{
+  "name": "zagel-desktop",
+  "version": "0.0.1",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "babel-node build.js",
+    "release-osx": "electron-packager ./bundle Zagel --platform=darwin --arch=x64 --version=0.34.1 --out=releases",
+    "start": "electron src"
+  },
+  "dependencies": {
+    "bluebird": "~2.10.2",
+    "qwest": "~2.2.2",
+    "flux": "~2.1.1",
+    "events": "~1.1.0"
+  },
+  "devDependencies": {
+    "babel": "~5.8.23",
+    "electron-prebuilt": "~0.34.1",
+    "rollup": "~0.20.3",
+    "rollup-plugin-commonjs": "~1.2.0",
+    "rollup-plugin-npm": "~1.0.0",
+    "rollup-plugin-babel": "~1.0.0",
+    "fs-extra": "~0.26.2"
+  }
+}

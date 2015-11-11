@@ -1,0 +1,40 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.self-view {
+  left: 20px;
+  position: absolute;
+  top: 20px;
+  transform: rotateY(180deg);
+  width: 100px;
+  z-index: 2;
+  /*-webkit-filter: brightness(250%);*/
+}
+
+.remote-view {
+  max-height: 100%;
+  width: 100%;
+}
+
+.live-contacts {
+  margin-bottom: 8px;
+}
+
+.live-contact,
+.live-contact-connected {
+  background-color: green;
+  border-radius: 4px;
+  color: white;
+  display: inline-block;
+  margin-right: 6px;
+  padding: 8px 12px;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.live-contact-connected {
+  background-color: red;
+  color: white;
+}
