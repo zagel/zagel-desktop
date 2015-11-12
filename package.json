@@ -5,6 +5,7 @@
   "scripts": {
     "build": "babel-node build.js",
     "release-osx": "electron-packager ./bundle Zagel --platform=darwin --arch=x64 --version=0.34.1 --out=releases",
+    "release-win": "electron-packager ./bundle Zagel --platform=win32 --arch=x64 --version=0.34.1 --out=releases",
     "start": "electron src"
   },
   "dependencies": {
