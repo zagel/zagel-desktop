@@ -11,7 +11,9 @@
     <div class="container"></div>
 
     <script>
-      require('babel/register')();
+      if (/env=development/.test(window.location.search)) {
+        require('babel/register')();
+      }
       require('./app');
     </script>
   </body>

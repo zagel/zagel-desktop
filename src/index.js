@@ -1,5 +1,6 @@
 var app = require('app');  // Module to control application life.
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
+var env = require('./env');
 
 // Report crashes to our server.
 require('crash-reporter').start();
@@ -20,10 +21,12 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({width: 800, height: 800});
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/app.html');
+  mainWindow.loadUrl('file://' + __dirname + '/app.html?env=' + env);
 
   // Open the DevTools.
-  mainWindow.openDevTools();
+  if (env === 'development') {
+    mainWindow.openDevTools();
+  }
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {

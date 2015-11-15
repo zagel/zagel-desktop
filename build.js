@@ -26,12 +26,16 @@ function error(err) {
 }
 
 bundle('src/app.js', 'bundle/app.js').then(() => {
-  fsp.copyAsync('src/app.html', 'bundle/app.html').catch(error);
-  fsp.copyAsync('src/index.js', 'bundle/index.js').catch(error);
-  fsp.copyAsync('src/css', 'bundle/css').catch(error);
-  fsp.writeJSONAsync("bundle/package.json", {
-    name: rootPackage.name,
-    version: rootPackage.version,
-    main: "index.js",
-  }).catch(error);
+  return Promise.all([
+    fsp.copyAsync('src/app.html', 'bundle/app.html'),
+    fsp.copyAsync('src/index.js', 'bundle/index.js'),
+    fsp.copyAsync('src/css', 'bundle/css'),
+
+    fsp.writeJSONAsync("bundle/env.json", "production"),
+    fsp.writeJSONAsync("bundle/package.json", {
+      name: rootPackage.name,
+      version: rootPackage.version,
+      main: "index.js",
+    }),
+  ]);
 }).catch(error);
