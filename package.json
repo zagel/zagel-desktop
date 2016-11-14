@@ -9,18 +9,21 @@
     "start": "electron src"
   },
   "dependencies": {
-    "bluebird": "~2.10.2",
-    "qwest": "~2.2.2",
-    "flux": "~2.1.1",
-    "events": "~1.1.0"
+    "bluebird": "^3.4.6",
+    "events": "^1.1.1",
+    "flux": "^3.1.0",
+    "qwest": "^4.4.5"
   },
   "devDependencies": {
     "babel": "~5.8.23",
-    "electron-prebuilt": "~0.34.1",
+    "babel-eslint": "^7.1.0",
+    "electron": "^1.4.6",
+    "eslint": "^3.10.0",
+    "eslint-plugin-import": "^2.2.0",
+    "fs-extra": "^0.26.7",
     "rollup": "~0.20.3",
-    "rollup-plugin-commonjs": "~1.2.0",
-    "rollup-plugin-npm": "~1.0.0",
     "rollup-plugin-babel": "~1.0.0",
-    "fs-extra": "~0.26.2"
+    "rollup-plugin-commonjs": "~1.2.0",
+    "rollup-plugin-npm": "~1.0.0"
   }
 }

@@ -1,9 +1,9 @@
 export default {
   empty() {},
   call(func, ...args) {
-    return this.is(func) ? func.apply(null, args) : undefined;
+    return this.is(func) ? func(...args) : undefined
   },
   is(func) {
-    return typeof func === 'function';
+    return typeof func === 'function'
   },
-};
+}
