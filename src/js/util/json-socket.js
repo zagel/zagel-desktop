@@ -1,4 +1,3 @@
-import fn from './fn'
 import Subscriber from './subscriber'
 import PromiseWithTimeout from './promise'
 
@@ -97,7 +96,7 @@ export default class JsonSocket extends Subscriber {
     if (msg.ping) {
       this.pong()
     } else if (msg.pong) {
-      fn.call(this.onpong)
+      this.onpong && this.onpong()
     } else {
       this.emit('message', msg)
     }

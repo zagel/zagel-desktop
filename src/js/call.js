@@ -1,5 +1,5 @@
 import RTC from './rtc'
-import {SignalingWithUser} from './signaling'
+import { SignalingWithUser } from './signaling'
 import Subscriber from './util/subscriber'
 import config from './config'
 import Promise from 'bluebird'
@@ -14,12 +14,12 @@ class BaseCall extends Subscriber {
   }
 
   audio(enabled) {
-    this._updateStreams({audio: enabled, video: this.videoEnabled})
+    this._updateStreams({ audio: enabled })
     return this
   }
 
   video(enabled) {
-    this._updateStreams({video: enabled, audio: this.audioEnabled})
+    this._updateStreams({ video: enabled })
     return this
   }
 
@@ -33,8 +33,10 @@ class BaseCall extends Subscriber {
     if (this.pc) {
       this.pc.close()
       this.pc = null
-      this.stream.stop()
-      this.stream = null
+      if (this.stream) {
+        this.stream.getTracks().forEach(t => t.stop())
+        this.stream = null
+      }
       this._disconnected()
       return true
     }
@@ -42,16 +44,22 @@ class BaseCall extends Subscriber {
   }
 
   _getMedia() {
-    const mediaConstraints = {video: this.videoEnabled, audio: this.audioEnabled}
-    return RTC.getMedia(mediaConstraints).then(stream => {
-      this.stream = stream
-      this.pc.addStream(this.stream)
-      this.emit('self-stream', this.stream)
+    const mediaConstraints = { video: this.videoEnabled, audio: this.audioEnabled }
+    return new Promise((resolve) => {
+      RTC.getMedia(mediaConstraints).then(stream => {
+        if (!this.pc) {
+          return null
+        }
+        this.stream = stream
+        this.pc.addStream(this.stream)
+        this.emit('local-stream', this.stream)
+        resolve(stream)
+      })
     })
   }
 
   _createPeerConnection() {
-    var pc = new RTC.PeerConnection({iceServers: config.ICE_SERVERS})
+    var pc = new RTC.PeerConnection({ iceServers: config.ICE_SERVERS })
     pc.onicecandidate = this._onIceCandidate.bind(this)
     pc.onaddstream = this._onRemoteStream.bind(this)
     this._waitFor('ice-candidate').then(this._onRemoteIceCandidate.bind(this))
@@ -91,8 +99,8 @@ class BaseCall extends Subscriber {
     })
   }
 
-  _updateStreams({video, audio}) {
-    if (this.active) {
+  _updateStreams({ video = this.videoEnabled, audio = this.audioEnabled }) {
+    if (this.stream) {
       if (video !== this.videoEnabled) {
         // TODO: update current video stream.
         // http://stackoverflow.com/questions/22787549/accessing-multiple-camera-javascript-getusermedia
@@ -118,6 +126,7 @@ class BaseCall extends Subscriber {
   }
 }
 
+
 export class OutCall extends BaseCall {
   start() {
     this.pc = this._createPeerConnection()
@@ -138,6 +147,7 @@ export class OutCall extends BaseCall {
     this._connected()
   }
 }
+
 
 export class InCall extends BaseCall {
   constructor(from, offer) {

@@ -14,18 +14,17 @@ class RawSignaling extends Subscriber {
   }
 
   connect() {
-    if (this.socket) {
-      return this
+    if (!this.socket) {
+      this.socket = new JsonSocket(config.WEBSOCKET_URL, { retry: true }).connect()
+      this.socket.on('message', this._onMessage.bind(this))
+      this.socket.on('close', this._onDisconnect.bind(this))
     }
-    this.socket = new JsonSocket(config.WEBSOCKET_URL, {retry: true}).connect()
-    this.socket.on('message', this._onMessage.bind(this))
-    this.socket.on('close', this._onDisconnect.bind(this))
     return this
   }
 
   send(msg) {
     this.socket.send(msg)
-    console.debug('Sending: "' + msg.type + '" to ID:', msg.to.id)
+    console.debug(`Sending: "${msg.type}" to ID: ${msg.to.id}`)
   }
 
   _onMessage(msg) {

@@ -1,6 +1,6 @@
-import CallManager from './js/call-manager'
-import Session from './js/session'
-import LiveStore from './js/flux/live-store'
+import CallManager from './call-manager'
+import Session from './session'
+import LiveStore from './flux/live-store'
 
 var callManager
 const randomID = Math.random().toString(36).substring(8)
@@ -60,7 +60,7 @@ function hookCallMedia(call) {
   var contactLink = document.querySelector('#live-' + call.user.id)
   contactLink.setAttribute('class', 'live-contact-connected')
 
-  call.on('self-stream', stream => {
+  call.on('local-stream', stream => {
     container.appendChild(makeVideo(stream, 'self-view', true))
   })
   call.on('remote-stream', stream => {

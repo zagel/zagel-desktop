@@ -1,5 +1,4 @@
 import Promise from 'bluebird'
-import fn from './fn'
 
 export default class PromiseWithTimeout {
   constructor(func, timeout) {
@@ -13,7 +12,7 @@ export default class PromiseWithTimeout {
       if (timeout) {
         timer = setTimeout(() => {
           reject({ timeout: true })
-          resolve = reject = fn.empty
+          resolve = reject = function() {}
         }, timeout)
       }
     }).finally(() => clearTimeout(timer))

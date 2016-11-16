@@ -5,7 +5,7 @@ const HOST = 'localhost'; const PORT = process.env.PORT || 5000
 // const HOST = 'zagel-server.herokuapp.com'; const PORT = process.env.PORT || 80
 
 const STUNs = [
-  {url: "stun:stun.l.google.com:19302"},
+  { url: "stun:stun.l.google.com:19302" },
   // {url: "stun:stun1.l.google.com:19302"},
   // {url: "stun:stun2.l.google.com:19302"},
   // {url: "stun:stun3.l.google.com:19302"},

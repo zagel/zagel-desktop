@@ -7,4 +7,8 @@ export default class Subscriber extends EventEmitter {
       release: () => this.removeListener(type, listener),
     }
   }
+
+  on(...args) {
+    return this.addListener(...args)
+  }
 }
