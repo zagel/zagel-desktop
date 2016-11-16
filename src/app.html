@@ -6,13 +6,11 @@
     <link rel="stylesheet" type="text/css" href="css/base.css" />
   </head>
   <body>
-    <div class="live-contacts"></div>
-
-    <div class="container"></div>
+    <div id="root"></div>
 
     <script type="text/javascript">
       if (/env=development/.test(window.location.search)) {
-        require('babel/register')()
+        require('babel-register')()
       }
       require('./js/app')
     </script>

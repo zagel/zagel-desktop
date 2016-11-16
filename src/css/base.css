@@ -1,16 +1,16 @@
-.container {
+.call {
   position: relative;
   width: 100%;
 }
 
-.self-view {
+.local-view {
   left: 20px;
   position: absolute;
   top: 20px;
   transform: rotateY(180deg);
   width: 100px;
   z-index: 2;
-  /*-webkit-filter: brightness(250%);*/
+  -webkit-filter: brightness(1250%);
 }
 
 .remote-view {
@@ -20,6 +20,7 @@
 
 .live-contacts {
   margin-bottom: 8px;
+  padding: 0;
 }
 
 .live-contact,
@@ -27,8 +28,9 @@
   background-color: green;
   border-radius: 4px;
   color: white;
+  cursor: pointer;
   display: inline-block;
-  margin-right: 6px;
+  margin: 0 4px 4px 0;
   padding: 8px 12px;
   text-decoration: none;
   vertical-align: middle;

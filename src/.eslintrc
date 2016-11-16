@@ -5,9 +5,13 @@
     "impliedStrict": true,
     "sourceType": "module",
     "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
+      "experimentalObjectRestSpread": true,
+      "jsx": true
     }
   },
+  "plugins": [
+    "react"
+  ],
   "rules": {
     "comma-dangle": [1, "always-multiline"],
     "semi": [2, "never"]
@@ -18,6 +22,7 @@
   },
   "extends": [
     "eslint:recommended",
+    "plugin:react/recommended",
     "plugin:import/errors",
     "plugin:import/warnings"
   ]
